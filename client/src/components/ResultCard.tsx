@@ -139,43 +139,28 @@ const ResultCard = ({ resData, filterFormData }: Props) => {
 
   return (
     <>
-      {resData.map(
-        (
-          {
-            City,
-            Diversity,
-            NeighborhoodType,
-            Politics,
-            Region,
-            State,
-            ageFiftyFiveToSeventyFour,
-            ageThirtyFiveToFiftyFour,
-            ageTwentyTwoToThirtyFour,
-            bestSchool,
-            fourByFiveBed,
-            postalCode,
-            twoByThreeBed,
-            twoByThreeToFourByFiveBed,
-          }, // City,
-        ) => (
-          // Diversity,
-          // NeighborhoodType,
-          // SearchedAmountOfBeds,
-          // Politics,
-          // Region,
-          // State,
-          // ageFiftyFiveToSeventyFour,
-          // ageThirtyFiveToFiftyFour,
-          // ageTwentyTwoToThirtyFour,
-          // fourByFiveBed,
-          // postalCode,
-          // twoByThreeBed,
-          // twoByThreeToFourByFiveBed,
-          // propertyTaxAmount,
-          // propertyTaxPercentage,
-          // stateTaxAmount,
-          // stateTaxPercentage,
-          // totalTaxAmount,
+      {results.map(
+        ({
+          City,
+          twoByThreeToFourByFiveBed,
+          twoByThreeBed,
+          postalCode,
+          fourByFiveBed,
+          ageTwentyTwoToThirtyFour,
+          ageThirtyFiveToFiftyFour,
+          ageFiftyFiveToSeventyFour,
+          State,
+          Region,
+          Politics,
+          NeighborhoodType,
+          Diversity,
+          SearchedAmountOfBeds,
+          propertyTaxAmount,
+          propertyTaxPercentage,
+          stateTaxAmount,
+          stateTaxPercentage,
+          totalTaxAmount,
+        }) => (
           <div
             className="flex flex-col rounded-md p-4 bg-white"
             style={{ boxShadow: 'rgb(0 0 0 / 24%) 0px 3px 8px' }}
@@ -215,20 +200,22 @@ const ResultCard = ({ resData, filterFormData }: Props) => {
                 style={{ borderRight: '1px solid white' }}
               >
                 <span className=" text-gray-500">State Tax</span>
-                <span className="appTextBlue mt-1">{'NaN'}</span>
-                <span className="appTextBlue mt-1">{'NaN'}</span>
+                <span className="appTextBlue mt-1">{stateTaxAmount}</span>
+                <span className="appTextBlue mt-1">{stateTaxPercentage}</span>
               </div>
               <div
                 className="flex flex-col text-center text-sm font-semibold my-3 px-3"
                 style={{ borderRight: '1px solid white' }}
               >
                 <span className=" text-gray-500">Property Tax</span>
-                <span className="appTextBlue mt-1">{'NaN'}</span>
-                <span className="appTextBlue mt-1">{'NaN'}</span>
+                <span className="appTextBlue mt-1">{propertyTaxAmount}</span>
+                <span className="appTextBlue mt-1">
+                  {propertyTaxPercentage}
+                </span>
               </div>
               <div className="flex flex-col text-center text-sm font-semibold my-3 px-3">
                 <span className=" text-gray-500">Total Tax</span>
-                <span className="appTextBlue mt-1">{'NaN'}</span>
+                <span className="appTextBlue mt-1">{totalTaxAmount}</span>
                 {/* <span className="appTextBlue mt-1">32%</span> */}
               </div>
             </div>
