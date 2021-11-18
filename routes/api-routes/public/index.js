@@ -1,8 +1,8 @@
-import schoolRoutes from "./school.route.js";
+import resultRoutes from "./results.route.js";
 
 export const publicRoutes = [
   {
-    path: "/school",
-    route: schoolRoutes,
+    path: "/result",
+    route: resultRoutes,
   },
 ];

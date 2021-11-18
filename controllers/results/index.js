@@ -1,13 +1,13 @@
 import { createSchool } from "./helpers/createSchool.js";
-import { getAllSchools } from "./helpers/getSchool.js";
+import { getResults } from "./helpers/getResults.js";
 import { updateSchool } from "./helpers/updateSchool.js";
 import { deleteSchool } from "./helpers/deleteSchool.js";
 
-const school = {
+const results = {
   createSchool,
-  getAllSchools,
+  getResults,
   updateSchool,
   deleteSchool,
 };
 
-export default school;
+export default results;

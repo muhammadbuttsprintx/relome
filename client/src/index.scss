@@ -59,7 +59,7 @@ input[type='number'] {
 
 .modal-content {
   border: none !important;
-  border-radius: 5%;
+  border-radius: 8px;
 }
 
 .bgAppBlue {
@@ -74,11 +74,18 @@ input[type='number'] {
 }
 
 .modal-dialog {
-  min-width: 80vw;
+  min-width: 60vw;
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 768px) {
   .page {
     top: -190px;
+  }
+  .modal-dialog {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .modal-content {
+    border-radius: 20px;
   }
 }

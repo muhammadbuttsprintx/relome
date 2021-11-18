@@ -1,21 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useWindowDimensions from '../helpers/useWindowDimensions';
 
 const Mission = () => {
+  const { width } = useWindowDimensions();
+  const isMd = () => {
+    return width !== null && width > 768;
+  };
   return (
     <>
       <div className="flex flex-col">
         <div className="bgAppBlue pb-40">
-          <div className="flex justify-center max-h-24">
-            <h1 className=" text-white text-5xl font-bold text-center">
-              Mission
-            </h1>
-          </div>
+          {isMd() && (
+            <div className="flex justify-center max-h-24">
+              <h1 className=" text-white text-5xl font-bold text-center">
+                Mission
+              </h1>
+            </div>
+          )}
         </div>
         <div className="page flex justify-center">
           <div className="container bg-white mt-3 md:mt-5 p-5 rounded-lg shadow-md w-11/12">
             <h3 className="font-semibold text-xl">Mission</h3>
-            <div className="font-semibold text-lg">
+            <div className="font-medium text-base">
               <p className="mt-4">
                 Do you really need more data? RELO is about singling out the few
                 from the many.

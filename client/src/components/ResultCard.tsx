@@ -1,6 +1,13 @@
 import React from 'react';
+import { City } from '../interfaces/City';
+import { FiltersForm } from '../interfaces/filtersForm';
 
-const ResultCard = () => {
+interface Props {
+  resData: City[];
+  filterFormData: FiltersForm;
+}
+
+const ResultCard = ({ resData, filterFormData }: Props) => {
   const results = [
     {
       postalCode: '01001',
@@ -132,28 +139,43 @@ const ResultCard = () => {
 
   return (
     <>
-      {results.map(
-        ({
-          City,
-          Diversity,
-          NeighborhoodType,
-          SearchedAmountOfBeds,
-          Politics,
-          Region,
-          State,
-          ageFiftyFiveToSeventyFour,
-          ageThirtyFiveToFiftyFour,
-          ageTwentyTwoToThirtyFour,
-          fourByFiveBed,
-          postalCode,
-          twoByThreeBed,
-          twoByThreeToFourByFiveBed,
-          propertyTaxAmount,
-          propertyTaxPercentage,
-          stateTaxAmount,
-          stateTaxPercentage,
-          totalTaxAmount,
-        }) => (
+      {resData.map(
+        (
+          {
+            City,
+            Diversity,
+            NeighborhoodType,
+            Politics,
+            Region,
+            State,
+            ageFiftyFiveToSeventyFour,
+            ageThirtyFiveToFiftyFour,
+            ageTwentyTwoToThirtyFour,
+            bestSchool,
+            fourByFiveBed,
+            postalCode,
+            twoByThreeBed,
+            twoByThreeToFourByFiveBed,
+          }, // City,
+        ) => (
+          // Diversity,
+          // NeighborhoodType,
+          // SearchedAmountOfBeds,
+          // Politics,
+          // Region,
+          // State,
+          // ageFiftyFiveToSeventyFour,
+          // ageThirtyFiveToFiftyFour,
+          // ageTwentyTwoToThirtyFour,
+          // fourByFiveBed,
+          // postalCode,
+          // twoByThreeBed,
+          // twoByThreeToFourByFiveBed,
+          // propertyTaxAmount,
+          // propertyTaxPercentage,
+          // stateTaxAmount,
+          // stateTaxPercentage,
+          // totalTaxAmount,
           <div
             className="flex flex-col rounded-md p-4 bg-white"
             style={{ boxShadow: 'rgb(0 0 0 / 24%) 0px 3px 8px' }}
@@ -184,7 +206,7 @@ const ResultCard = () => {
               {NeighborhoodType}
             </span>
             <div className="flex font-bold text-sm mt-3">
-              <span className="mr-3">{SearchedAmountOfBeds}</span>
+              <span className="mr-3">{filterFormData.typeOfHome}</span>
               <span>Avg: {twoByThreeToFourByFiveBed}</span>
             </div>
             <div className="grid grid-cols-3 bg-blue-200 rounded-md mt-3">
@@ -193,22 +215,20 @@ const ResultCard = () => {
                 style={{ borderRight: '1px solid white' }}
               >
                 <span className=" text-gray-500">State Tax</span>
-                <span className="appTextBlue mt-1">{stateTaxAmount}</span>
-                <span className="appTextBlue mt-1">{stateTaxPercentage}</span>
+                <span className="appTextBlue mt-1">{'NaN'}</span>
+                <span className="appTextBlue mt-1">{'NaN'}</span>
               </div>
               <div
                 className="flex flex-col text-center text-sm font-semibold my-3 px-3"
                 style={{ borderRight: '1px solid white' }}
               >
                 <span className=" text-gray-500">Property Tax</span>
-                <span className="appTextBlue mt-1">{propertyTaxAmount}</span>
-                <span className="appTextBlue mt-1">
-                  {propertyTaxPercentage}
-                </span>
+                <span className="appTextBlue mt-1">{'NaN'}</span>
+                <span className="appTextBlue mt-1">{'NaN'}</span>
               </div>
               <div className="flex flex-col text-center text-sm font-semibold my-3 px-3">
                 <span className=" text-gray-500">Total Tax</span>
-                <span className="appTextBlue mt-1">{totalTaxAmount}</span>
+                <span className="appTextBlue mt-1">{'NaN'}</span>
                 {/* <span className="appTextBlue mt-1">32%</span> */}
               </div>
             </div>
@@ -243,12 +263,12 @@ const ResultCard = () => {
             </div>
             <div className="flex justify-between mt-2">
               <button
-                className=" flex flex-1 bg-white border-2 py-2 rounded-md font-medium px-3 mr-2 justify-center"
+                className=" flex flex-1 bg-white border-2 py-2 rounded-md font-medium px-3 mr-2 justify-center hover:shadow-md"
                 style={{ color: '#598db8', borderColor: '#4882b3' }}
               >
                 <span>{Diversity}</span>
               </button>
-              <button className="flex flex-1 bgAppBlue py-2 rounded-md font-medium px-3 text-white text-center justify-center items-center">
+              <button className="flex flex-1 bgAppBlue py-2 rounded-md font-medium px-3 text-white text-center justify-center items-center hover:shadow-md hover:bg-blue-900">
                 <span>{Politics}</span>
               </button>
             </div>

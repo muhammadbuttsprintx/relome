@@ -1,21 +1,28 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import useWindowDimensions from '../helpers/useWindowDimensions';
 
 const Feedback = () => {
+  const { width } = useWindowDimensions();
+  const isMd = () => {
+    return width !== null && width > 768;
+  };
   return (
     <>
       <div className="flex flex-col">
         <div className="bgAppBlue pb-40">
-          <div className="flex justify-center max-h-24">
-            <h1 className=" text-white text-5xl font-bold text-center">
-              Feedback!
-            </h1>
-          </div>
+          {isMd() && (
+            <div className="flex justify-center max-h-24">
+              <h1 className=" text-white text-5xl font-bold text-center">
+                Feedback!
+              </h1>
+            </div>
+          )}
         </div>
         <div className="page flex justify-center">
           <div className="container bg-white mt-3 md:mt-5 p-5 rounded-lg shadow-md w-11/12">
             <h3 className="font-semibold text-xl">How does this all work?</h3>
-            <div className="md:w-8/12 font-medium text-lg">
+            <div className="md:w-8/12 font-medium text-base">
               <p className="mt-4">
                 We exist purely to help you find the best place to live. This is
                 your chance to tell us what you need! Blow off some steam, have
@@ -62,12 +69,15 @@ const Feedback = () => {
             </div>
             <div className="md:w-8/12 md:flex md:justify-between md:items-center">
               <div className="flex-1 px-2 items-center" key={uuidv4()}>
-                <input className="mr-4 font-semibold" type="checkbox" />
+                <input
+                  className="mr-4 font-semibold hover:bg-indigo-200 hover:shadow-md"
+                  type="checkbox"
+                />
                 <label className="font-semibold mt-5">
                   I acknowledge RELO's privacy policy
                 </label>
               </div>
-              <button className="px-5 py-3 bgAppBlue rounded-md text-white font-medium mt-4 md:mt-0 w-full md:w-auto">
+              <button className="px-5 py-3 bgAppBlue rounded-md text-white font-medium mt-4 md:mt-0 w-full md:w-auto hover:bg-blue-900">
                 Send
               </button>
             </div>

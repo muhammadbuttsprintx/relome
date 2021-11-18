@@ -1,20 +1,27 @@
 import React from 'react';
+import useWindowDimensions from '../helpers/useWindowDimensions';
 
 const HowItWorks = () => {
+  const { width } = useWindowDimensions();
+  const isMd = () => {
+    return width !== null && width > 768;
+  };
   return (
     <>
       <div className="flex flex-col">
         <div className="bgAppBlue pb-40">
-          <div className="flex justify-center max-h-24">
-            <h1 className=" text-white text-5xl font-bold text-center">
-              How it Works
-            </h1>
-          </div>
+          {isMd() && (
+            <div className="flex justify-center max-h-24">
+              <h1 className=" text-white text-5xl font-bold text-center">
+                How it Works
+              </h1>
+            </div>
+          )}
         </div>
         <div className="page flex justify-center">
           <div className="container bg-white mt-3 md:mt-5 p-5 rounded-lg shadow-md w-11/12">
             <h3 className="font-semibold text-xl">How does this all work?</h3>
-            <div className="font-semibold text-lg">
+            <div className="font-medium text-base">
               <p className="mt-4">
                 We’ve worked hard to make it easy to uncover the best place for
                 you. This is your chance to check as many boxes and fill in as

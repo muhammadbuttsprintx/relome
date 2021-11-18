@@ -24,6 +24,7 @@ const Navbar = () => {
           {width !== null && width < 768 && (
             <>
               <button
+                className="hover:shadow-md hover:bg-transparent p-3 rounded-full"
                 onClick={() => {
                   setSideBarOpen((prev) => !prev);
                 }}
@@ -38,7 +39,7 @@ const Navbar = () => {
 
               {sideBarOpen && (
                 <Modal
-                  className="absolute w-3/4 h-screen left-0 top-0 bg-white p-4 border-0"
+                  className="absolute w-3/4 h-screen left-0 top-0 bg-white pl-4 border-0"
                   show={sideBarOpen}
                   onHide={() => {
                     setSideBarOpen(false);
@@ -68,7 +69,7 @@ const Navbar = () => {
             </div>
           )}
           {width !== null && width < 768 && (
-            <a href="#top">
+            <a className="p-3 rounded-full hover:shadow-md" href="#top">
               <svg width="30" height="30" viewBox="0 0 512 512">
                 <path
                   fill="#fff"

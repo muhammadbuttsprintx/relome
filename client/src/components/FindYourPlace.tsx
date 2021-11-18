@@ -1,13 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from '../helpers/useForm';
 import useWindowDimensions from '../helpers/useWindowDimensions';
+import { FiltersForm } from '../interfaces/filtersForm';
+import ResultsService from '../services/ResultsService';
 import FiltersCard from './FiltersCard';
 import Results from './Results';
 
 const FindYourPlace = () => {
   const { width } = useWindowDimensions();
+  const [resData, setResData] = useState<any>([]);
+  const filtersFormInitial: FiltersForm = {
+    ageRange: '35-54',
+    // politics
+    conservative: false,
+    moderate: false,
+    liberal: false,
+    // regions
+    northwest: false,
+    southwest: false,
+    midAtlantic: false,
+    california: false,
+    midwest: false,
+    south: false,
+    rockies: false,
+    northeast: false,
+    florida: false,
+
+    typeOfHome: '2/3 BEDS',
+    homeBudget: '',
+    householdIncome: '',
+    // typesOfLiving
+    bigCityApartments: false,
+    urbanApartmentsHomes: false,
+    smallLawnNeighborhoods: false,
+    suburbanYards: false,
+    bestSchools: false,
+  };
+  const { data, onChange, onSubmit, setData } = useForm(
+    submitCallback,
+    filtersFormInitial,
+  );
+
+  async function submitCallback() {
+    const res = await ResultsService.getFilteredResults(data);
+    if (res.success) {
+      setResData(res.data);
+      console.log(res.data);
+      console.log(true);
+    }
+  }
+  console.log(resData);
   const isMd = () => {
     return width !== null && width > 768;
   };
+
   return (
     <>
       <div className="flex flex-col">
@@ -18,18 +64,21 @@ const FindYourPlace = () => {
             </h1>
           </div>
           <div className="flex justify-center mt-4 h-7">
-            {isMd() && (
-              <hr className="w-20 font-black opacity-100 text-white" />
+            {!isMd() && (
+              <hr className="w-20 font-black  opacity-100 text-white" />
             )}
           </div>
         </div>
         <div className="page flex flex-col justify-center">
-          <FiltersCard />
-          <Results />
+          <FiltersCard
+            onSubmit={onSubmit}
+            data={data}
+            setData={setData}
+            onChange={onChange}
+          />
+          <Results resData={resData} filterFormData={data} />
           <div className="flex justify-center mt-5">
-            <button
-              className={`bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white`}
-            >
+            <button className="bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white hover:bg-blue-900">
               Load More Results
             </button>
           </div>

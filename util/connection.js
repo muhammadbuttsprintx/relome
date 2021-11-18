@@ -9,7 +9,7 @@ const options = {
   useUnifiedTopology: true,
 };
 export function connectDB() {
-  connect("mongodb://localhost/schoolTest", options).catch((error) =>
+  connect("mongodb://localhost/relo", options).catch((error) =>
     console.log(error)
   );
 
