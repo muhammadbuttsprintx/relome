@@ -2,8 +2,12 @@ import pkg from "mongoose";
 const { Schema, model } = pkg;
 
 const PropertyTax = new Schema({
-  ZipCode: String,
-  PropertyTax: String,
+  zipCode: String,
+  propertyTax: Number,
 });
 
-export const PropertyTaxSchema = model("propertyTax", PropertyTax);
+export const PropertyTaxSchema = model(
+  "propertyTax",
+  PropertyTax,
+  "propertyTax"
+);

@@ -9,13 +9,13 @@ const Cities = new Schema({
   NeighborhoodType: String,
   Diversity: String,
   Politics: String,
-  ageTwentyTwoToThirtyFour: String,
-  ageThirtyFiveToFiftyFour: String,
-  ageFiftyFiveToSeventyFour: String,
+  ageTwentyTwoToThirtyFour: Number,
+  ageThirtyFiveToFiftyFour: Number,
+  ageFiftyFiveToSeventyFour: Number,
   twoByThreeToFourByFiveBed: String,
-  twoByThreeBed: String,
-  fourByFiveBed: String,
+  twoByThreeBed: Number,
+  fourByFiveBed: Number,
   bestSchool: String,
 });
 
-export const CitySchema = model("citie", Cities);
+export const CitySchema = model("city", Cities, "city");

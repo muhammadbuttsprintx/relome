@@ -2,14 +2,14 @@ import pkg from "mongoose";
 const { Schema, model } = pkg;
 
 const StateTax = new Schema({
-  TaxType: String,
-  State: String,
-  Deduction: String,
-  RangeMin: String,
-  RangeMax: String,
-  RangeTax: String,
-  LocalTax: String,
-  Tax: String,
+  taxType: String,
+  state: String,
+  deduction: Number,
+  rangeMin: Number,
+  rangeMax: Number,
+  rangeTax: Number,
+  localTax: String,
+  tax: Number,
 });
 
-export const StateTaxSchema = model("stateTax", StateTax);
+export const StateTaxSchema = model("stateTax", StateTax, "stateTax");

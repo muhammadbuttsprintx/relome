@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Definition from './Definition';
 import { typesOfHome, typesOfLiving } from '../helpers/mockData';
 import { FiltersForm } from '../interfaces/filtersForm';
+import { setTypesOfLivingInput } from '../helpers/filtersCardHelper';
 
 interface Props {
   data: any;
@@ -22,23 +23,21 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
             <h5 className="text-sm font-semibold">Type of Home</h5>
             <div className="flex justify-between">
               <div className="flex flex-1 border-1 rounded-md border-blue-500 bg-blue-50 mt-2">
-                {typesOfHome.map((typesOfHomeEl, index) => (
+                {typesOfHome.map(({ title, value }, index) => (
                   <button
                     key={uuidv4()}
                     className={`flex-1 py-2 m-0.5 font-medium appBlue hover:bg-blue-900 rounded-md ${
                       btnActive === index && 'text-white  bgAppBlue'
                     }`}
-                    name={typesOfHomeEl}
-                    value={data[typesOfHomeEl]}
                     onClick={() => {
                       setBtnActive(index);
                       setData((prevData: FiltersForm) => {
-                        console.log({ ...prevData, TypeOfHome: typesOfHomeEl });
-                        return { ...prevData, TypeOfHome: typesOfHomeEl };
+                        console.log({ ...prevData, typeOfHome: value });
+                        return { ...prevData, typeOfHome: value };
                       });
                     }}
                   >
-                    {typesOfHomeEl}
+                    {title}
                   </button>
                 ))}
               </div>
@@ -49,13 +48,12 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
             <div className="flex items-center bg-blue-50 mt-2 w-40">
               <img className="max-h-4 ml-5" src="/$.png" alt="" />
               <input
-                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 placeholder"
+                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 placeholder text-black"
                 type="number"
                 name="homeBudget"
                 value={data.HomeBudget}
                 onChange={onChange}
                 placeholder="10,000.00"
-                required
               />
             </div>
           </div>
@@ -78,7 +76,13 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
               <Definition showDef={showDef} setShowDef={setShowDef} />
             </div>
             {typesOfLiving.map(({ name, title }) => (
-              <div className="flex flex-1 p-2" key={uuidv4()}>
+              <div
+                className="flex flex-1 p-2"
+                onClick={() => {
+                  setTypesOfLivingInput(title, data.typesOfLiving, setData);
+                }}
+                key={uuidv4()}
+              >
                 <input
                   className="mr-4 mt-1 hover:bg-indigo-200 hover:shadow-md"
                   type="checkbox"
@@ -108,7 +112,7 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
             <div className="flex items-center bg-blue-50 mt-2 w-40">
               <img className="max-h-4 ml-5" src="/$.png" alt="" />
               <input
-                className="bg-blue-50 border-0 overflow-hidden"
+                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 text-black"
                 type="number"
                 name="householdIncome"
                 value={data.HouseholdIncome}

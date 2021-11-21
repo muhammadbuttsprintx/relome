@@ -3,9 +3,8 @@ import SideBar from './SideBar';
 import { v4 as uuidv4 } from 'uuid';
 import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import useWindowDimensions from '../helpers/useWindowDimensions';
-
 import { useLocation } from 'react-router-dom';
+import useWindowDimensions from '../helpers/useWindowDimensions';
 
 const Navbar = () => {
   const location = useLocation();
@@ -20,7 +19,7 @@ const Navbar = () => {
   return (
     <>
       <div className=" mx-0 sticky top-0 z-30 bgAppBlue">
-        <div className="container flex justify-between py-4 items-center">
+        <div className="container flex justify-between py-4 px-0 items-center">
           {width !== null && width < 768 && (
             <>
               <button

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from '../helpers/useForm';
 import useWindowDimensions from '../helpers/useWindowDimensions';
 import { FiltersForm } from '../interfaces/filtersForm';
@@ -10,30 +10,30 @@ const FindYourPlace = () => {
   const { width } = useWindowDimensions();
   const [resData, setResData] = useState<any>([]);
   const filtersFormInitial: FiltersForm = {
-    ageRange: '35-54',
-    // politics
-    conservative: false,
-    moderate: false,
-    liberal: false,
-    // regions
-    northwest: false,
-    southwest: false,
-    midAtlantic: false,
-    california: false,
-    midwest: false,
-    south: false,
-    rockies: false,
-    northeast: false,
-    florida: false,
+    ageRange: 'ageThirtyFiveToFiftyFour',
+    politics: [],
+    // conservative: false,
+    // moderate: false,
+    // liberal: false,
+    regions: [],
+    // northwest: false,
+    // southwest: false,
+    // midAtlantic: false,
+    // california: false,
+    // midwest: false,
+    // south: false,
+    // rockies: false,
+    // northeast: false,
+    // florida: false,
 
-    typeOfHome: '2/3 BEDS',
+    typeOfHome: 'twoByThreeBed',
     homeBudget: '',
     householdIncome: '',
-    // typesOfLiving
-    bigCityApartments: false,
-    urbanApartmentsHomes: false,
-    smallLawnNeighborhoods: false,
-    suburbanYards: false,
+    typesOfLiving: [],
+    // bigCityApartments: false,
+    // urbanApartmentsHomes: false,
+    // smallLawnNeighborhoods: false,
+    // suburbanYards: false,
     bestSchools: false,
   };
   const { data, onChange, onSubmit, setData } = useForm(
@@ -46,10 +46,9 @@ const FindYourPlace = () => {
     if (res.success) {
       setResData(res.data);
       console.log(res.data);
-      console.log(true);
     }
   }
-  console.log(resData);
+
   const isMd = () => {
     return width !== null && width > 768;
   };
@@ -59,7 +58,7 @@ const FindYourPlace = () => {
       <div className="flex flex-col">
         <div className="bgAppBlue pb-40">
           <div className="flex justify-center max-h-24">
-            <h1 className=" text-white text-5xl font-bold text-center">
+            <h1 className=" text-white text-3xl md:text-6xl font-bold text-center">
               Find Your Place
             </h1>
           </div>

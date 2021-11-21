@@ -6,26 +6,29 @@ export default class ResultsService {
   static async getFilteredResults(filters: FiltersForm) {
     try {
       const res = await ApiService.get(
+        // &conservative=${filters.conservative}
+        // &moderate=${filters.moderate}
+        // &liberal=${filters.liberal}
+        // &northwest=${filters.northwest}
+        // &southwest=${filters.southwest}
+        // &midAtlantic=${filters.midAtlantic}
+        // &california=${filters.california}
+        // &midwest=${filters.midwest}
+        // &south=${filters.south}
+        // &rockies=${filters.rockies}
+        // &northeast=${filters.northeast}
+        // &florida=${filters.florida}
+        // &bigCityApartments=${filters.bigCityApartments}
+        // &urbanApartmentsHomes=${filters.urbanApartmentsHomes}
+        // &smallLawnNeighborhoods=${filters.smallLawnNeighborhoods}
+        // &suburbanYards=${filters.suburbanYards}
         `${ResultsService.baseUrl[0]}/?ageRange=${filters.ageRange}
-    &conservative=${filters.conservative}
-    &moderate=${filters.moderate}
-    &liberal=${filters.liberal}
-    &northwest=${filters.northwest}
-    &southwest=${filters.southwest}
-    &midAtlantic=${filters.midAtlantic}
-    &california=${filters.california}
-    &midwest=${filters.midwest}
-    &south=${filters.south}
-    &rockies=${filters.rockies}
-    &northeast=${filters.northeast}
-    &florida=${filters.florida}
+    &politics=${encodeURIComponent(JSON.stringify(filters.politics))}
+    &regions=${encodeURIComponent(JSON.stringify(filters.regions))}
     &typeOfHome=${filters.typeOfHome}
     &homeBudget=${filters.homeBudget}
     &householdIncome=${filters.householdIncome}
-    &bigCityApartments=${filters.bigCityApartments}
-    &urbanApartmentsHomes=${filters.urbanApartmentsHomes}
-    &smallLawnNeighborhoods=${filters.smallLawnNeighborhoods}
-    &suburbanYards=${filters.suburbanYards}
+    &typesOfLiving=${encodeURIComponent(JSON.stringify(filters.typesOfLiving))}
     &bestSchools=${filters.bestSchools}`,
       );
       return res;

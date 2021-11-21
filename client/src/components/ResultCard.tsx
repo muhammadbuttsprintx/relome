@@ -250,12 +250,12 @@ const ResultCard = ({ resData, filterFormData }: Props) => {
             </div>
             <div className="flex justify-between mt-2">
               <button
-                className=" flex flex-1 bg-white border-2 py-2 rounded-md font-medium px-3 mr-2 justify-center hover:shadow-md"
+                className=" flex flex-1 bg-white border-2 py-2 rounded-md font-medium px-3 mr-2 justify-center hover:shadow-md text-sm md:text-lg"
                 style={{ color: '#598db8', borderColor: '#4882b3' }}
               >
                 <span>{Diversity}</span>
               </button>
-              <button className="flex flex-1 bgAppBlue py-2 rounded-md font-medium px-3 text-white text-center justify-center items-center hover:shadow-md hover:bg-blue-900">
+              <button className="flex flex-1 bgAppBlue py-2 rounded-md font-medium px-3 text-white text-center justify-center items-center hover:shadow-md hover:bg-blue-900 text-sm md:text-lg">
                 <span>{Politics}</span>
               </button>
             </div>

@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
 body {
   font-family: 'Montserrat', sans-serif;
   /* background-color: rgb(235, 235, 235); */
@@ -77,9 +78,14 @@ input[type='number'] {
   min-width: 60vw;
 }
 
+.howItWorks {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
 @media only screen and (max-width: 768px) {
   .page {
-    top: -190px;
+    top: -140px;
   }
   .modal-dialog {
     margin-right: 0;
@@ -87,5 +93,9 @@ input[type='number'] {
   }
   .modal-content {
     border-radius: 20px;
+  }
+  .textCard {
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
   }
 }

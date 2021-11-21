@@ -31,4 +31,7 @@ export const typesOfLiving = [
   { name: 'suburbanYards', title: 'Suburban Yards' },
 ];
 
-export const typesOfHome = ['2/3 BEDS', '4/5 BEDS'];
+export const typesOfHome = [
+  { title: '2/3 BEDS', value: 'twoByThreeBed' },
+  { title: '4/5 BEDS', value: 'fourByFiveBed' },
+];
