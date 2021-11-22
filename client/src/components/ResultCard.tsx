@@ -189,7 +189,13 @@ const ResultCard = ({ resData, filterFormData }: Props) => {
                   {neighborhoodType}
                 </span>
                 <div className="flex font-bold text-sm mt-3">
-                  <span className="mr-3">{filterFormData.typeOfHome}</span>
+                  <span className="mr-3">
+                    {filterFormData.typeOfHome === 'twoByThreeBed'
+                      ? '2/3 BEDS'
+                      : filterFormData.typeOfHome === 'fourByFiveBed'
+                      ? '4/5 BEDS'
+                      : '2/3 BEDS'}
+                  </span>
                   <span>Avg: {average}</span>
                 </div>
                 <div className="grid grid-cols-3 bg-blue-200 rounded-md mt-3">

@@ -1,0 +1,8 @@
+PORT=5000
+VERSION=v1
+BASE_URL=api
+CONNECTION_STRING_DEVLOPMENT=mongodb+srv://admin-mbl:1234Zxdx@cluster0.fiors.mongodb.net/voterListApp?retryWrites=true&w=majority
+CONNECTION_STRING_STAGING=mongodb+srv://voters:wq3Oadgn2uUIQlOk@cluster0.e2yxr.mongodb.net/voterListApp?retryWrites=true&w=majority
+IS_DEV= true
+JWT_SECRET=Nbhs789145+354656@
+API_KEY=SG.cpdcjwepcjio

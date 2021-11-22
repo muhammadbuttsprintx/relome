@@ -35,6 +35,11 @@ export const getResults = async (req, res) => {
       bestSchool: bestSchool ? "Yes" : /.*.*/,
     };
     const pageSize = 9;
+    const resultsCount = await CitySchema.find(dataFilters).count();
+    // .sort({ [ageRange]: -1 })
+    // .limit(pageSize)
+    // .skip((page - 1) * pageSize)
+    // .clone();
     const cityData = await CitySchema.find(dataFilters)
       .sort({ [ageRange]: -1 })
       .limit(pageSize)
@@ -58,6 +63,7 @@ export const getResults = async (req, res) => {
         propertyTaxAmount: 0,
         propertyTaxPercentage: 0,
         totalTaxAmount: 0,
+        resultsCount,
         noTax: false,
       };
       // const currentCityStateTaxes = await StateTaxSchema.find({
