@@ -3,7 +3,7 @@ import useWindowDimensions from '../helpers/useWindowDimensions';
 import LeftFiltersPane from './LeftFiltersPane';
 import RightFiltersPane from './RightFiltersPane';
 
-const FiltersCard = ({ onSubmit, data, setData, onChange }: any) => {
+const FiltersCard = ({ onSubmit, data, setData, onChange, loading }: any) => {
   const { width } = useWindowDimensions();
 
   return (
@@ -56,7 +56,13 @@ const FiltersCard = ({ onSubmit, data, setData, onChange }: any) => {
             className="bgAppBlue border-2 border-white py-2 w-full md:w-40 text-base font-medium text-white rounded-md hover:bg-blue-900"
             type="submit"
           >
-            Submit
+            {loading ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            ) : (
+              'Submit'
+            )}
           </button>
         </div>
       </div>

@@ -8,32 +8,16 @@ import Results from './Results';
 
 const FindYourPlace = () => {
   const { width } = useWindowDimensions();
+  const [loading, setLoading] = useState<boolean>(false);
   const [resData, setResData] = useState<any>([]);
   const filtersFormInitial: FiltersForm = {
     ageRange: 'ageThirtyFiveToFiftyFour',
     politics: [],
-    // conservative: false,
-    // moderate: false,
-    // liberal: false,
     regions: [],
-    // northwest: false,
-    // southwest: false,
-    // midAtlantic: false,
-    // california: false,
-    // midwest: false,
-    // south: false,
-    // rockies: false,
-    // northeast: false,
-    // florida: false,
-
     typeOfHome: 'twoByThreeBed',
     homeBudget: '',
     householdIncome: '',
     typesOfLiving: [],
-    // bigCityApartments: false,
-    // urbanApartmentsHomes: false,
-    // smallLawnNeighborhoods: false,
-    // suburbanYards: false,
     bestSchools: false,
     page: 1,
   };
@@ -43,9 +27,15 @@ const FindYourPlace = () => {
   );
 
   async function submitCallback() {
+    setLoading(true);
     const res = await ResultsService.getFilteredResults(data);
     if (res?.success) {
-      setResData(res.data);
+      if (data.page > 1) {
+        setResData((prev: any) => [...prev, ...res.data]);
+      } else {
+        setResData(res.data);
+      }
+      setLoading(false);
     }
   }
 
@@ -74,21 +64,30 @@ const FindYourPlace = () => {
             data={data}
             setData={setData}
             onChange={onChange}
+            loading={loading}
           />
           <Results resData={resData} filterFormData={data} />
-          <div className="flex justify-center mt-5">
-            <button
-              className="bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white hover:bg-blue-900"
-              onClick={() => {
-                setData((prev: FiltersForm) => {
-                  return { ...prev, page: prev.page + 1 };
-                });
-                submitCallback();
-              }}
-            >
-              Load More Results
-            </button>
-          </div>
+          {resData.length > 1 && (
+            <div className="flex justify-center mt-5">
+              <button
+                className="bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white hover:bg-blue-900"
+                onClick={() => {
+                  setData((prev: FiltersForm) => {
+                    return { ...prev, page: prev.page + 1 };
+                  });
+                  submitCallback();
+                }}
+              >
+                {loading ? (
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden"></span>
+                  </div>
+                ) : (
+                  'Load More Results'
+                )}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
