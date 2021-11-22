@@ -2,7 +2,7 @@ import _axios from 'axios';
 
 export class ApiService {
   static axios = _axios.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: 'https://relome-p0n2m93wn-muhammadbuttsprintx.vercel.app/api/',
   });
 
   static async get(url: string, config?: any): Promise<any> {
