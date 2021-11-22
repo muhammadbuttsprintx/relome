@@ -1,5 +1,7 @@
 import { config } from "dotenv";
 import pkg from "mongoose";
+import "dotenv";
+
 const { connect, connection } = pkg;
 
 config();
@@ -9,7 +11,7 @@ const options = {
   useUnifiedTopology: true,
 };
 export function connectDB() {
-  connect("mongodb://localhost/relo", options).catch((error) =>
+  connect(process.env.MONGODB_CONNECTION, options).catch((error) =>
     console.log(error)
   );
 
