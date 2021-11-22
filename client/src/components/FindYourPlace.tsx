@@ -10,6 +10,7 @@ const FindYourPlace = () => {
   const { width } = useWindowDimensions();
   const [loading, setLoading] = useState<boolean>(false);
   const [resData, setResData] = useState<any>([]);
+  const [resultsCount, setResultsCount] = useState<number>(0);
   const filtersFormInitial: FiltersForm = {
     ageRange: 'ageThirtyFiveToFiftyFour',
     politics: [],
@@ -34,6 +35,7 @@ const FindYourPlace = () => {
         setResData((prev: any) => [...prev, ...res.data]);
       } else {
         setResData(res.data);
+        setResultsCount(res.resultsCount);
       }
       setLoading(false);
     }
@@ -66,7 +68,11 @@ const FindYourPlace = () => {
             onChange={onChange}
             loading={loading}
           />
-          <Results resData={resData} filterFormData={data} />
+          <Results
+            resData={resData}
+            filterFormData={data}
+            resultsCount={resultsCount}
+          />
           {resData.length > 1 && (
             <div className="flex justify-center mt-5">
               <button

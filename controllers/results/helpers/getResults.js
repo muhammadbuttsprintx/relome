@@ -63,7 +63,6 @@ export const getResults = async (req, res) => {
         propertyTaxAmount: 0,
         propertyTaxPercentage: 0,
         totalTaxAmount: 0,
-        resultsCount,
         noTax: false,
       };
       // const currentCityStateTaxes = await StateTaxSchema.find({
@@ -146,6 +145,7 @@ export const getResults = async (req, res) => {
     }
     return res.json({
       success: true,
+      resultsCount,
       data: resData,
     });
   } catch (e) {
