@@ -35,6 +35,7 @@ const FindYourPlace = () => {
     // smallLawnNeighborhoods: false,
     // suburbanYards: false,
     bestSchools: false,
+    page: 1,
   };
   const { data, onChange, onSubmit, setData } = useForm(
     submitCallback,
@@ -43,9 +44,8 @@ const FindYourPlace = () => {
 
   async function submitCallback() {
     const res = await ResultsService.getFilteredResults(data);
-    if (res.success) {
+    if (res?.success) {
       setResData(res.data);
-      console.log(res.data);
     }
   }
 
@@ -77,7 +77,15 @@ const FindYourPlace = () => {
           />
           <Results resData={resData} filterFormData={data} />
           <div className="flex justify-center mt-5">
-            <button className="bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white hover:bg-blue-900">
+            <button
+              className="bgAppBlue py-2 rounded-md md:border-0 font-medium px-14 text-white text-center justify-center border-2 border-white hover:bg-blue-900"
+              onClick={() => {
+                setData((prev: FiltersForm) => {
+                  return { ...prev, page: prev.page + 1 };
+                });
+                submitCallback();
+              }}
+            >
               Load More Results
             </button>
           </div>

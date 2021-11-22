@@ -24,4 +24,5 @@ export interface FiltersForm {
   // smallLawnNeighborhoods: boolean;
   // suburbanYards: boolean;
   bestSchools: boolean;
+  page: number;
 }

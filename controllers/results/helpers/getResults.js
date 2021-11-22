@@ -10,8 +10,9 @@ export const getResults = async (req, res) => {
         params[key] = params[key].trim();
       }
     }
-    const { ageRange, homeBudget, typeOfHome, householdIncome, bestSchool } =
-      params;
+    const { ageRange, typeOfHome, bestSchool, page } = params;
+    const householdIncome = +params.householdIncome;
+    const homeBudget = +params.homeBudget;
     const politics = JSON.parse(params.politics);
     const regions = JSON.parse(params.regions);
     const typesOfLiving = JSON.parse(params.typesOfLiving);
@@ -20,89 +21,127 @@ export const getResults = async (req, res) => {
       const index = regions.findIndex(isRockies);
       regions[index] = "Rocky Mountains";
     }
-    console.log(politics, regions, typesOfLiving, bestSchool);
     const budget = {
       min: homeBudget / 2,
       max: +(+homeBudget + +homeBudget / 2),
     };
-    console.log("budget", budget);
     const dataFilters = {
       Politics: politics[0] ? { $in: politics } : /.*.*/,
       Region: regions[0] ? { $in: regions } : /.*.*/,
       NeighborhoodType: typesOfLiving[0] ? { $in: typesOfLiving } : /.*.*/,
       [typeOfHome]: homeBudget
         ? { $gte: budget.min, $lte: budget.max }
-        : { $gte: 0, $lte: 9999999999999999999999999 },
+        : { $gte: 0 },
       bestSchool: bestSchool ? "Yes" : /.*.*/,
     };
-    // const pageSize = 9;
+    const pageSize = 9;
     const cityData = await CitySchema.find(dataFilters)
       .sort({ [ageRange]: -1 })
+      .limit(pageSize)
+      .skip((page - 1) * pageSize)
       .clone();
-    if (householdIncome) {
-      const resData = [];
-      cityData.forEach(async (city) => {
-        const currentCity = {
-          city: city.City,
-          neighborhoodType: city.NeighborhoodType,
-          average: city.twoByThreeToFourByFiveBed,
-          ageTwentyTwoToThirtyFour: city.ageTwentyTwoToThirtyFour,
-          ageThirtyFiveToFiftyFour: city.ageThirtyFiveToFiftyFour,
-          ageFiftyFiveToSeventyFour: city.ageFiftyFiveToSeventyFour,
-          politics: city.Politics,
-          diversity: city.Diversity,
-        };
-        // const currentCityStateTaxes = await StateTaxSchema.find({
-        //   state: city.State,
-        // });
+
+    const resData = [];
+    for (const city of cityData) {
+      const currentCity = {
+        city: city.City,
+        postalCode: city.postalCode,
+        neighborhoodType: city.NeighborhoodType,
+        average: city.twoByThreeToFourByFiveBed,
+        ageTwentyTwoToThirtyFour: city.ageTwentyTwoToThirtyFour,
+        ageThirtyFiveToFiftyFour: city.ageThirtyFiveToFiftyFour,
+        ageFiftyFiveToSeventyFour: city.ageFiftyFiveToSeventyFour,
+        politics: city.Politics,
+        diversity: city.Diversity,
+        totalStateTax: 0,
+        stateTaxPercentage: 0,
+        propertyTaxAmount: 0,
+        propertyTaxPercentage: 0,
+        totalTaxAmount: 0,
+        noTax: false,
+      };
+      // const currentCityStateTaxes = await StateTaxSchema.find({
+      //   state: city.State,
+      // });
+      if (householdIncome) {
         const currentStates = await StateTaxSchema.find({
           state: city.State,
         }).sort({ rangeTax: 1 });
+        if (!currentStates[0]) {
+          continue;
+        }
 
-        const taxAbleIncome =
-          householdIncome - currentStates[0]?.deduction
-            ? currentStates[0].deduction
-            : 0;
-        let sumOfLocalTaxSlabs = 0;
-        currentStates.forEach(async (state) => {
-          if (taxAbleIncome > state.rangeMin) {
-            const currentSlabMaxAmount = state.rangeMax
-              ? Math.min(taxAbleIncome, state.rangeMax)
-              : taxAbleIncome;
-            const currentSlabAmount = currentSlabMaxAmount - state.rangeMin;
-            const currentSlabTax = currentSlabAmount / (state.rangeTax * 100);
-            sumOfLocalTaxSlabs += currentSlabTax;
-            const localTax = householdIncome / (state.tax * 100);
-            const totalStateTax = Math.ceil(sumOfLocalTaxSlabs + localTax);
-            const stateTaxPercentage = householdIncome / totalStateTax;
-            currentCity.totalStateTax = totalStateTax;
-            currentCity.stateTaxPercentage = stateTaxPercentage;
+        if (currentStates[0].taxType === "NO TAX") {
+          currentCity.noTax = true;
+        } else if (currentStates[0].taxType === "FLAT TAX") {
+          if (currentStates[0]?.deduction < householdIncome) {
+            const taxAbleIncome =
+              householdIncome - currentStates[0]?.deduction
+                ? currentStates[0].deduction
+                : 0;
 
-            // propertyTax calculation
-            if (homeBudget) {
-              const currentCityPropertyTax = await PropertyTaxSchema.find({
-                zipCode: `${parseInt(state.postalCode)}`,
-              });
-              const propertyTaxAmount = Math.ceil(
-                homeBudget / (currentCityPropertyTax[0].propertyTax * 100)
-              );
-              const propertyTaxPercentage = homeBudget / propertyTaxAmount;
-              currentCity.propertyTaxAmount = propertyTaxAmount;
-              currentCity.propertyTaxPercentage = propertyTaxPercentage;
-            }
+            const localTax =
+              currentStates[0]?.tax === 0
+                ? 0
+                : (householdIncome * currentStates[0]?.tax) / 100;
+            const finalStateTax =
+              (currentStates[0].rangeTax * taxAbleIncome) / 100 + localTax;
+            currentCity.totalStateTax = finalStateTax;
           }
-        });
-        resData.push(currentCity);
-        console.log(resData, "resDaraugiohijok");
-        console.log(resData.length, "resData");
-      });
+        } else {
+          const taxAbleIncome =
+            householdIncome - currentStates[0]?.deduction
+              ? currentStates[0].deduction
+              : 0;
+          let sumOfLocalTaxSlabs = 0;
+          console.log(currentStates, "currentStates");
+          currentStates.forEach(async (state) => {
+            if (taxAbleIncome > state.rangeMin) {
+              const currentSlabMaxAmount = state.rangeMax
+                ? Math.min(taxAbleIncome, state.rangeMax)
+                : taxAbleIncome;
+              const currentSlabAmount = currentSlabMaxAmount - state.rangeMin;
+              const currentSlabTax = (currentSlabAmount * state.rangeTax) / 100;
+              sumOfLocalTaxSlabs += currentSlabTax;
 
-      console.log(resData.length, resData[0], resData[resData.length - 1]);
-      return res.json({
-        success: true,
-        data: resData,
-      });
+              const localTax =
+                state.tax === 0 ? 0 : (householdIncome * state.tax) / 100;
+              currentCity.totalStateTax = sumOfLocalTaxSlabs + localTax;
+
+              console.log((currentCity.totalStateTax * 100) / householdIncome);
+              currentCity.stateTaxPercentage =
+                (currentCity.totalStateTax * 100) / householdIncome;
+              // console.log(householdIncome, localTax, "sumOfLocalTaxSlabs");
+            }
+          });
+        }
+      }
+
+      // propertyTax calculation
+      if (homeBudget) {
+        const currentCityPropertyTax = await PropertyTaxSchema.findOne({
+          zipCode: `${city.postalCode}`,
+        });
+        if (currentCityPropertyTax) {
+          console.log(currentCityPropertyTax);
+
+          currentCity.propertyTaxPercentage = Number(
+            currentCityPropertyTax?.propertyTax
+          );
+          currentCity.propertyTaxAmount = Math.ceil(
+            (currentCityPropertyTax?.propertyTax * homeBudget) / 100
+          );
+        }
+      }
+      currentCity.totalTaxAmount =
+        currentCity.totalStateTax + currentCity.propertyTaxAmount;
+
+      resData.push(currentCity);
     }
+    return res.json({
+      success: true,
+      data: resData,
+    });
   } catch (e) {
     console.log("Error:", e.message);
     return res.json({

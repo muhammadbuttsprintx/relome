@@ -29,6 +29,7 @@ export default class ResultsService {
     &homeBudget=${filters.homeBudget}
     &householdIncome=${filters.householdIncome}
     &typesOfLiving=${encodeURIComponent(JSON.stringify(filters.typesOfLiving))}
+    &page=${filters.page}
     &bestSchools=${filters.bestSchools}`,
       );
       return res;
