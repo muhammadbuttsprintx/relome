@@ -3,7 +3,14 @@ import useWindowDimensions from '../helpers/useWindowDimensions';
 import LeftFiltersPane from './LeftFiltersPane';
 import RightFiltersPane from './RightFiltersPane';
 
-const FiltersCard = ({ onSubmit, data, setData, onChange, loading }: any) => {
+const FiltersCard = ({
+  onSubmit,
+  data,
+  setData,
+  onChange,
+  loading,
+  setIsSearched,
+}: any) => {
   const { width } = useWindowDimensions();
 
   return (

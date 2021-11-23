@@ -9,6 +9,7 @@ import Results from './Results';
 const FindYourPlace = () => {
   const { width } = useWindowDimensions();
   const [loading, setLoading] = useState<boolean>(false);
+  const [isSearched, setIsSearched] = useState<boolean>(false);
   const [resData, setResData] = useState<any>([]);
   const [resultsCount, setResultsCount] = useState<number>(0);
   const filtersFormInitial: FiltersForm = {
@@ -37,6 +38,7 @@ const FindYourPlace = () => {
         setResData(res.data);
         setResultsCount(res.resultsCount);
       }
+      setIsSearched(true);
       setLoading(false);
     }
   }
@@ -67,11 +69,13 @@ const FindYourPlace = () => {
             setData={setData}
             onChange={onChange}
             loading={loading}
+            setIsSearched={setIsSearched}
           />
           <Results
             resData={resData}
             filterFormData={data}
             resultsCount={resultsCount}
+            isSearched={isSearched}
           />
           {resData.length > 1 && (
             <div className="flex justify-center mt-5">
