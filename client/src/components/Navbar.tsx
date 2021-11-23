@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <>
       <div className=" mx-0 sticky top-0 z-30 bgAppBlue">
-        <div className="container flex justify-between px-0 py-4 md:py-5 w-11/12 items-center">
+        <div className="container flex justify-between px-0 md:py-5 w-11/12 items-center">
           {/* <div className="container flex justify-between py-2 px-0 md:py-4 items-center"> */}
           {width !== null && width < 560 && (
             <>

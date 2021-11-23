@@ -8,7 +8,7 @@ const FiltersCard = ({ onSubmit, data, setData, onChange, loading }: any) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="container bgAppBlue md:bg-white mt-3 md:mt-5 md:p-5 md:rounded-lg md:shadow-md">
+      <div className="container bgAppBlue md:bg-white mt-3 md:mt-5 md:p-10 md:rounded-lg md:shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <LeftFiltersPane data={data} setData={setData} onChange={onChange} />
           <RightFiltersPane data={data} setData={setData} onChange={onChange} />

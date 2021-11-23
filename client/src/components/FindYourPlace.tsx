@@ -50,7 +50,7 @@ const FindYourPlace = () => {
       <div className="flex flex-col">
         <div className="bgAppBlue pb-28">
           <div className="flex justify-center max-h-24">
-            <h1 className=" text-white text-3xl md:text-6xl font-bold text-center">
+            <h1 className=" text-white text-3xl md:text-6xl font-bold text-center mt-5">
               Find Your Place
             </h1>
           </div>

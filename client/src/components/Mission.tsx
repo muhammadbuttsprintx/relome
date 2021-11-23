@@ -20,7 +20,7 @@ const Mission = () => {
           )}
         </div>
         <div className="page flex justify-center">
-          <div className="container bg-white mt-3 md:mt-5 p-5 rounded-lg shadow-md w-11/12">
+          <div className="container bg-white mt-3 md:mt-5 p-3 md:p-5 rounded-lg shadow-md w-11/12">
             <h3 className="font-semibold text-xl">Mission</h3>
             <div className="font-medium text-base">
               <p className="mt-4">
