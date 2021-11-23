@@ -48,7 +48,7 @@ const FindYourPlace = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="bgAppBlue pb-40">
+        <div className="bgAppBlue pb-28">
           <div className="flex justify-center max-h-24">
             <h1 className=" text-white text-3xl md:text-6xl font-bold text-center">
               Find Your Place

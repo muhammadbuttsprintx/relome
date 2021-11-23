@@ -8,7 +8,7 @@ const FiltersCard = ({ onSubmit, data, setData, onChange, loading }: any) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="container bgAppBlue md:bg-white mt-3 md:mt-5 p-5 md:rounded-lg md:shadow-md">
+      <div className="container bgAppBlue md:bg-white mt-3 md:mt-5 md:p-5 md:rounded-lg md:shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <LeftFiltersPane data={data} setData={setData} onChange={onChange} />
           <RightFiltersPane data={data} setData={setData} onChange={onChange} />
@@ -53,7 +53,7 @@ const FiltersCard = ({ onSubmit, data, setData, onChange, loading }: any) => {
         <hr className="font-bold my-3" />
         <div className="flex md:justify-start">
           <button
-            className="bgAppBlue border-2 border-white py-2 w-full md:w-40 text-base font-medium text-white rounded-md hover:bg-blue-900"
+            className="bgAppBlue border-2 border-white py-2 w-full md:w-44 text-base font-medium text-white rounded-md hover:bg-blue-900"
             type="submit"
           >
             {loading ? (

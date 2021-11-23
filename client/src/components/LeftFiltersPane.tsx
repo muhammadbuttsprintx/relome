@@ -34,7 +34,7 @@ const LeftFiltersPane = ({ onChange, data, setData }: Props) => {
     <>
       <div className=" text-white">
         <div className="md:text-black">
-          <h5 className="text-sm font-semibold ">Age Range*</h5>
+          <h5 className="text-sm font-semibold">Age Range*</h5>
           <div className="flex border-1 rounded-md border-blue-500 bg-blue-50 mt-2">
             {ageRange.map(({ title, value }, index) => (
               <button
@@ -56,7 +56,7 @@ const LeftFiltersPane = ({ onChange, data, setData }: Props) => {
             ))}
           </div>
           <div className="mt-4">
-            <h5 className="text-sm mb-2 font-semibold">Politics</h5>
+            <h5 className="text-sm font-semibold mb-2">Politics</h5>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {politics.map((title) => (
                 <div

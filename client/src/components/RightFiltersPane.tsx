@@ -48,7 +48,7 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
             <div className="flex items-center bg-blue-50 mt-2 w-40">
               <img className="max-h-4 ml-5" src="/$.png" alt="" />
               <input
-                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 placeholder text-black"
+                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 placeholder text-blue-500"
                 type="number"
                 name="homeBudget"
                 value={data.HomeBudget}
@@ -62,7 +62,7 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
           <div>
             <div className="flex">
               <h5 className="text-sm font-semibold">Types of Living</h5>
-              <div className="text-white">
+              <div className="text-white flex items-end">
                 <span
                   className=" md:text-blue-500 ml-4 text-sm underline font-medium cursor-pointer"
                   onClick={() => {
@@ -84,7 +84,7 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
                 key={uuidv4()}
               >
                 <input
-                  className="mr-4 mt-1 hover:bg-indigo-200 hover:shadow-md"
+                  className="mr-4 mt-1 hover:bg-indigo-200 hover:shadow-md "
                   type="checkbox"
                   name={name}
                   value={data[name]}
@@ -112,7 +112,7 @@ const RightFiltersPane = ({ data, onChange, setData }: Props) => {
             <div className="flex items-center bg-blue-50 mt-2 w-40">
               <img className="max-h-4 ml-5" src="/$.png" alt="" />
               <input
-                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 text-black"
+                className="bg-blue-50 border-0 overflow-hidden placeholder-blue-400 text-blue-500"
                 type="number"
                 name="householdIncome"
                 value={data.HouseholdIncome}
