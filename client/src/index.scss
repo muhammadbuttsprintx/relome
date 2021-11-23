@@ -2,10 +2,10 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  /* background-color: rgb(235, 235, 235); */
-}
+// body {
+//   font-family: 'pulpDisplay', sans-serif;
+//   /* background-color: rgb(235, 235, 235); */
+// }
 
 .bg-app-green {
   background-color: #15a73f;
@@ -75,12 +75,16 @@ input[type='number'] {
 }
 
 .modal-dialog {
-  min-width: 60vw;
+  // min-width: 60vw;
 }
 
 .howItWorks {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
+}
+
+.sideBarTextBlue {
+  color: #4982b2;
 }
 
 @media only screen and (max-width: 768px) {

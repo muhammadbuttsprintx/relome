@@ -19,8 +19,9 @@ const Navbar = () => {
   return (
     <>
       <div className=" mx-0 sticky top-0 z-30 bgAppBlue">
-        <div className="container flex justify-between py-4 px-0 items-center">
-          {width !== null && width < 768 && (
+        <div className="container flex justify-between px-0 py-4 md:py-5 w-11/12 items-center">
+          {/* <div className="container flex justify-between py-2 px-0 md:py-4 items-center"> */}
+          {width !== null && width < 560 && (
             <>
               <button
                 className="hover:shadow-md hover:bg-transparent p-3 rounded-full"
@@ -37,28 +38,33 @@ const Navbar = () => {
               </button>
 
               {sideBarOpen && (
-                <Modal
-                  className="absolute w-3/4 h-screen left-0 top-0 bg-white pl-4 border-0"
-                  show={sideBarOpen}
-                  onHide={() => {
-                    setSideBarOpen(false);
-                  }}
-                >
-                  <SideBar setSideBarOpen={setSideBarOpen} />
-                </Modal>
+                <div className="pl-20">
+                  <Modal
+                    className="absolute w-5/6 h-screen left-0 top-0 bg-white border-0 rounded-r-3xl p-0"
+                    // style={{ padding: '0 0 0 1rem !important' }}
+                    show={sideBarOpen}
+                    onHide={() => {
+                      setSideBarOpen(false);
+                    }}
+                  >
+                    <SideBar setSideBarOpen={setSideBarOpen} />
+                  </Modal>
+                </div>
               )}
             </>
           )}
           <Link to="/">
             <img src="/Logo.svg" alt="logo" width="90" />
           </Link>
-          {width !== null && width > 768 && (
+          {width !== null && width > 560 && (
             <div className="flex items-center">
               {links.map(({ name, link }) => (
                 <Link
                   key={uuidv4()}
                   to={link}
-                  className={`mx-7 text-xl text-white font-medium ${
+                  className={`${
+                    name === 'Feedback!' ? 'ml-7' : 'mx-7'
+                  } text-base text-white font-medium ${
                     location.pathname === link && 'border-b-2 '
                   }`}
                 >
@@ -67,7 +73,7 @@ const Navbar = () => {
               ))}
             </div>
           )}
-          {width !== null && width < 768 && (
+          {width !== null && width < 560 && (
             <a className="p-3 rounded-full hover:shadow-md" href="#top">
               <svg width="30" height="30" viewBox="0 0 512 512">
                 <path

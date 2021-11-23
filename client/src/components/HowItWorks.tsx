@@ -20,8 +20,13 @@ const HowItWorks = () => {
         </div>
         <div className="page flex justify-center">
           <div className="container textCard md:px-12 bg-white mt-3 md:mt-5 py-4 md:py-5 rounded-lg shadow-md w-11/12">
-            <h3 className="font-semibold text-xl">How does this all work?</h3>
-            <div className="font-medium text-base">
+            {width && width > 768 && (
+              <h3 className="font-semibold text-lg">How does this all work?</h3>
+            )}
+            {width && width < 768 && (
+              <h3 className="font-semibold text-lg">How it works</h3>
+            )}
+            <div className="font-medium text-sm">
               <p className="mt-4">
                 We’ve worked hard to make it easy to uncover the best place for
                 you. This is your chance to check as many boxes and fill in as

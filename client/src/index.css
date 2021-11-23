@@ -2,7 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/*light version*/
+@font-face {
+  font-family: 'pulpDisplay';
+  src: url('/public/Font/EOT/PulpDisplay-Light.eot');
+  src: local('Pulp Display Light'), local('Pulp-Display-Light'),
+    url('/public/Font/OTF/PulpDisplay-Light.otf') format('opentype');
+  font-weight: 300;
+}
+/*default version*/
+@font-face {
+  font-family: 'pulpDisplay';
+  src: url('/public/Font/EOT/PulpDisplay-Medium.eot');
+  src: local('Pulp Display'), local('Pulp-Display'),
+    url('/public/Font/OTF/PulpDisplay-Medium.otf') format('opentype');
+  font-weight: 400;
+}
+/*medium version*/
+@font-face {
+  font-family: 'pulpDisplay';
+  src: url('/public/Font/EOT/PulpDisplay-Regular.eot');
+  src: local('Pulp Display Regular'), local('Pulp-Display-Regular'),
+    url('/public/Font/OTF/PulpDisplay-Regular.otf') format('opentype');
+  font-weight: 500;
+}
+/*medium version*/
+@font-face {
+  font-family: 'pulpDisplay';
+  src: url('/public/Font/EOT/PulpDisplay-SemiBold.eot');
+  src: local('Pulp Display Semi Bold'), local('Pulp-Display-Semi-Bold'),
+    url('/public/Font/OTF/PulpDisplay-SemiBold.otf') format('opentype');
+  font-weight: 600;
+}
+/*bold version*/
+@font-face {
+  font-family: 'pulpDisplay';
+  src: url('/public/Font/EOT/PulpDisplay-Bold.eot');
+  src: local('Pulp Display Bold'), local('Pulp-Display-Bold'),
+    url('/public/Font/OTF/PulpDisplay-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'pulpDisplay', sans-serif;
   /* background-color: rgb(235, 235, 235); */
 }
